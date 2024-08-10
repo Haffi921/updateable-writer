@@ -2,8 +2,7 @@ import { stdout } from "node:process";
 
 import { cursorDown, cursorUp, eraseLine } from "ansi-escapes";
 
-import { cursorHide } from "./hideCursor.js";
-import { stdinDisable } from "./stdinDisable.js";
+import { hideCursor } from "./hideCursor.js";
 
 interface Line {
   readonly id: number;
@@ -18,8 +17,15 @@ export class UpdateableWriter {
   }
 
   constructor() {
-    stdinDisable();
-    cursorHide();
+    hideCursor();
+
+    console.log = (...data: any[]) => {
+      this.writeLine(data.join(""));
+    };
+  }
+
+  handleStdin(data: Buffer) {
+    this.writeLine(data.toString());
   }
 
   writeLine(text: Line["text"]): Line {

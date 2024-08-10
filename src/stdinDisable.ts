@@ -2,7 +2,7 @@ import process, { stdin } from "node:process";
 
 const ASCII_EXT_CODE = 0x03;
 
-export const { stdinDisable, stdinEnable } = (function () {
+export const { disableStdin, enableStdin } = (function () {
   let disabled = false;
 
   function handleData(data: Buffer) {
@@ -11,35 +11,35 @@ export const { stdinDisable, stdinEnable } = (function () {
     }
   }
 
-  function stdinDisable() {
+  function disableStdin() {
     if (!disabled) {
       // Stdin
       stdin.setRawMode(true);
-      // stdin.on("data", handleData);
-      stdin.pause();
+      stdin.on("data", handleData);
+      // stdin.pause();
 
       // Flag
       disabled = true;
 
       // Exit cleanup
-      process.on("exit", stdinEnable);
+      process.on("exit", enableStdin);
     }
   }
 
-  function stdinEnable() {
+  function enableStdin() {
     if (disabled) {
       // Stdin
-      stdin.resume();
-      // stdin.off("data", handleData);
+      // stdin.resume();
+      stdin.off("data", handleData);
       stdin.setRawMode(false);
 
       // Flag
       disabled = false;
 
       // Exit cleanup
-      process.off("exit", stdinEnable);
+      process.off("exit", enableStdin);
     }
   }
 
-  return { stdinDisable, stdinEnable };
+  return { disableStdin, enableStdin };
 })();

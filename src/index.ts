@@ -12,6 +12,8 @@ line1.update("Hello, world");
 await new Promise((resolve) => setTimeout(resolve, 1000));
 line2.update("It's working!");
 
+console.log("Hello");
+
 await new Promise((resolve) => setTimeout(resolve, 1000));
 const line4 = updateableWriter.writeLine("Yey!");
 

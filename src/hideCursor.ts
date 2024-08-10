@@ -2,24 +2,24 @@ import process, { stdout } from "node:process";
 
 import ansi from "ansi-escapes";
 
-export const { cursorHide, cursorShow } = (function () {
+export const { hideCursor, showCursor } = (function () {
   let hidden = false;
 
-  function cursorHide() {
+  function hideCursor() {
     if (!hidden) {
       stdout.write(ansi.cursorHide);
       hidden = true;
-      process.on("exit", cursorShow);
+      process.on("exit", showCursor);
     }
   }
 
-  function cursorShow() {
+  function showCursor() {
     if (hidden) {
       stdout.write(ansi.cursorShow);
       hidden = false;
-      process.off("exit", cursorShow);
+      process.off("exit", showCursor);
     }
   }
 
-  return { cursorHide, cursorShow };
+  return { hideCursor, showCursor };
 })();
