@@ -4,14 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup --config"
   },
   "type": "module",
-  "keywords": [],
+  "keywords": [
+    "stdout",
+    "updateable",
+    "writer",
+    "process",
+    "terminal"
+  ],
   "author": "Hafsteinn Ragnarsson <haffi921@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
     "@types/node": "^22.2.0",
+    "rollup": "^4.20.0",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-dts": "^6.1.1",
     "tslib": "^2.6.3",
     "tsx": "^4.17.0",
     "typescript": "^5.5.4"
