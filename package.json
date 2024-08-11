@@ -12,7 +12,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^22.2.0",
-    "ansi-escapes": "^7.0.0",
+    "tslib": "^2.6.3",
     "tsx": "^4.17.0",
     "typescript": "^5.5.4"
   }

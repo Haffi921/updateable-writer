@@ -1,13 +1,13 @@
 import process, { stdout } from "node:process";
 
-import ansi from "ansi-escapes";
+import { ANSI } from "./ansiTerminalCommands.js";
 
 export const { hideCursor, showCursor } = (function () {
   let hidden = false;
 
   function hideCursor() {
     if (!hidden) {
-      stdout.write(ansi.cursorHide);
+      stdout.write(ANSI.CURSOR.HIDE);
       hidden = true;
       process.on("exit", showCursor);
     }
@@ -15,7 +15,7 @@ export const { hideCursor, showCursor } = (function () {
 
   function showCursor() {
     if (hidden) {
-      stdout.write(ansi.cursorShow);
+      stdout.write(ANSI.CURSOR.SHOW);
       hidden = false;
       process.off("exit", showCursor);
     }
