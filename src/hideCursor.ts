@@ -1,22 +1,23 @@
 import process, { stdout } from "node:process";
 import { ANSI } from "./ansiTerminalCommands.js";
 
-export const { hideCursor, showCursor } = new (class {
-  private hidden = false;
+export const { hideCursor, showCursor } = (function () {
+  let hidden = false;
 
-  hideCursor() {
-    if (!this.hidden) {
-      stdout.write(ANSI.CURSOR.HIDE);
-      this.hidden = true;
-      process.on("exit", this.showCursor);
-    }
-  }
-
-  showCursor() {
-    if (this.hidden) {
-      stdout.write(ANSI.CURSOR.SHOW);
-      this.hidden = false;
-      process.off("exit", this.showCursor);
-    }
-  }
+  return {
+    hideCursor() {
+      if (!hidden) {
+        stdout.write(ANSI.CURSOR.HIDE);
+        hidden = true;
+        process.on("exit", showCursor);
+      }
+    },
+    showCursor() {
+      if (hidden) {
+        stdout.write(ANSI.CURSOR.SHOW);
+        hidden = false;
+        process.off("exit", showCursor);
+      }
+    },
+  };
 })();
