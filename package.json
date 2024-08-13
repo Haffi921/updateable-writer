@@ -1,10 +1,10 @@
 {
-  "name": "updateable-stdout",
+  "name": "updateable-writer",
   "version": "0.2.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Updateable Stream-Writer, made for writing lines to stdout and then updating lines with new information",
   "scripts": {
-    "build": "rollup --config"
+    "build": "rollup --config",
+    "test": "tsx test/index.ts"
   },
   "type": "module",
   "keywords": [
@@ -16,6 +16,27 @@
   ],
   "author": "Hafsteinn Ragnarsson <haffi921@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Haffi921/updateable-writer.git"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "exports": {
+    ".": {
+      "require": {
+        "default": "./dist/index.cjs",
+        "types": "./dist/index.d.cts"
+      },
+      "import": {
+        "default": "./dist/index.js",
+        "types": "./dist/index.d.ts"
+      },
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
