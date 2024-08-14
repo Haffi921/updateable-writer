@@ -1,4 +1,4 @@
-import { UpdateableWriter } from "../src";
+import { UpdateableWriter } from "updateable-writer";
 
 const updateableWriter = new UpdateableWriter();
 

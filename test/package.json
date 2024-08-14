@@ -1,0 +1,12 @@
+{
+  "name": "testy",
+  "version": "0.0.1",
+  "type": "module",
+  "keywords": [],
+  "private": true,
+  "author": "Hafsteinn Ragnarsson <haffi921@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "updateable-writer": "link:..\\.."
+  }
+}
