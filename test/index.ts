@@ -1,10 +1,8 @@
-import { UpdateableWriter } from "updateable-writer";
+import { writeLine } from "updateable-writer";
 
-const updateableWriter = new UpdateableWriter();
-
-const line1 = updateableWriter.writeLine("Hello, Haffi");
-const line2 = updateableWriter.writeLine("Does this work?");
-const line3 = updateableWriter.writeLine("I hope so");
+const line1 = writeLine("Hello, Haffi");
+const line2 = writeLine("Does this work?");
+const line3 = writeLine("I hope so");
 
 await new Promise((resolve) => setTimeout(resolve, 2000));
 line1.update("Hello, world");
@@ -15,7 +13,7 @@ line2.update("It's working!");
 console.log("Hello");
 
 await new Promise((resolve) => setTimeout(resolve, 1000));
-const line4 = updateableWriter.writeLine("Yey!");
+const line4 = writeLine("Yey!");
 
 await new Promise((resolve) => setTimeout(resolve, 2000));
 line3.update("This is fun");

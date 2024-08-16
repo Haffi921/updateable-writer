@@ -7,6 +7,6 @@
   "author": "Hafsteinn Ragnarsson <haffi921@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "updateable-writer": "link:..\\.."
+    "updateable-writer": "link:.."
   }
 }

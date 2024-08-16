@@ -9,64 +9,57 @@ interface Line {
   update(text: string): void;
 }
 
-export class UpdateableWriter {
-  private lines: Line[] = [];
-  private get length() {
-    return this.lines.length;
-  }
+export const { writeLine } = (function () {
+  const lines: Line[] = [];
 
-  constructor() {
-    hideCursor();
+  hideCursor();
 
-    console.log = (...data: any[]) => {
-      const lines = data.join("").split("\n");
-      for (const line of lines) {
-        this.writeLine(line);
-      }
-    };
-  }
+  console.log = (...data: any[]) => {
+    const lines = data.join("").split("\n");
+    for (const line of lines) {
+      writeLine(line);
+    }
+  };
 
-  handleStdin(data: Buffer) {
-    this.writeLine(data.toString());
-  }
-
-  writeLine(text: Line["text"]): Line {
-    const id = this.getNextId();
+  function writeLine(text: Line["text"]): Line {
+    const id = getNextId();
     const newLine: Line = {
       id,
-      text: this.sanitizeText(text),
-      update: this.createLineUpdater(id),
+      text: sanitizeText(text),
+      update: createLineUpdater(id),
     };
-    this.lines.push(newLine);
-    this.write(newLine.text);
+    lines.push(newLine);
+    write(newLine.text);
     return newLine;
   }
 
-  private write(text: Line["text"], index: number = this.length) {
-    stdout.write(ANSI_CURSOR_MOVE.UP(this.length - index));
+  function write(text: Line["text"], index: number = lines.length) {
+    stdout.write(ANSI_CURSOR_MOVE.UP(lines.length - index));
     stdout.write(ANSI.ERASELINE);
     stdout.write(text);
-    stdout.write(ANSI_CURSOR_MOVE.DOWN(this.length - index - 1));
+    stdout.write(ANSI_CURSOR_MOVE.DOWN(lines.length - index - 1));
   }
 
-  private sanitizeText(text: Line["text"]): Line["text"] {
+  function sanitizeText(text: Line["text"]): Line["text"] {
     return text.split("\n")[0].concat("\n");
   }
 
-  private updateLine(id: Line["id"], text: Line["text"]): void {
-    const lineIdx = this.lines.findIndex((line) => line.id === id);
+  function updateLine(id: Line["id"], text: Line["text"]): void {
+    const lineIdx = lines.findIndex((line) => line.id === id);
     if (lineIdx === -1) return;
 
-    const line = this.lines[lineIdx];
-    line.text = this.sanitizeText(text);
-    this.write(line.text, lineIdx);
+    const line = lines[lineIdx];
+    line.text = sanitizeText(text);
+    write(line.text, lineIdx);
   }
 
-  private createLineUpdater(id: Line["id"]) {
-    return this.updateLine.bind(this, id);
+  function createLineUpdater(id: Line["id"]) {
+    return updateLine.bind(null, id);
   }
 
-  private getNextId() {
-    return this.length;
+  function getNextId() {
+    return lines.length;
   }
-}
+
+  return { writeLine };
+})();

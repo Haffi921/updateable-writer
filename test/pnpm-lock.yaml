@@ -9,5 +9,5 @@ importers:
   .:
     dependencies:
       updateable-writer:
-        specifier: link:..\..
-        version: link:../..
+        specifier: link:..
+        version: link:..
