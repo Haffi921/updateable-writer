@@ -35,7 +35,7 @@ line.update("Hello, World!");
   - [Installation](#installation)
   - [Usage](#usage)
     - [Function: `writeLine`](#function-writeline)
-    - [Class: `Line`](#class-line)
+    - [Interface: `Line`](#interface-line)
   - [Authors](#authors)
   - [License](#license)
 
@@ -56,7 +56,7 @@ Functions the similar to `console.log`. takes in `text: string` and returns a `L
 
 > Note: A line termination character (`\n`) will be added to `text` if there is none before. Any text after a line termination character will not be printed.
 
-### Class: `Line`
+### Interface: `Line`
 
 Interface with a function `update`, that will update the text in the terminal. Functions the same as `writeLine` as it receives a `text: string`.
 
