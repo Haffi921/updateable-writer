@@ -1,6 +1,6 @@
 import { stdout } from "node:process";
 
-import { ANSI } from "./ansiTerminalCommands.js";
+import { ANSI, ANSI_CURSOR_MOVE } from "./ansiTerminalCommands.js";
 import { hideCursor } from "./hideCursor.js";
 
 interface Line {
@@ -43,10 +43,10 @@ export class UpdateableWriter {
   }
 
   private write(text: Line["text"], index: number = this.length) {
-    stdout.write(ANSI.CURSOR.UP(this.length - index));
+    stdout.write(ANSI_CURSOR_MOVE.UP(this.length - index));
     stdout.write(ANSI.ERASELINE);
     stdout.write(text);
-    stdout.write(ANSI.CURSOR.DOWN(this.length - index - 1));
+    stdout.write(ANSI_CURSOR_MOVE.DOWN(this.length - index - 1));
   }
 
   private sanitizeText(text: Line["text"]): Line["text"] {
