@@ -1,6 +1,6 @@
 {
   "name": "updateable-writer",
-  "version": "0.2.4",
+  "version": "1.0.0",
   "description": "Updateable Stream-Writer, made for writing lines to stdout and then updating lines with new information",
   "scripts": {
     "build": "rollup --config",
