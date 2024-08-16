@@ -21,7 +21,8 @@
     "url": "git+https://github.com/Haffi921/updateable-writer.git"
   },
   "files": [
-    "dist/*"
+    "dist/*",
+    "updateable-writer-*.tgz"
   ],
   "exports": {
     ".": {
